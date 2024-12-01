@@ -29,6 +29,7 @@ plugins {
     // Adding plugins used in multiple places to the classpath for centralized version control
     id("com.github.johnrengelman.shadow") version "7.1.2" apply false
     id("org.jetbrains.dokka") version "1.9.20" apply false
+    id("org.jetbrains.kotlinx.kover") version "0.8.3"
 }
 
 nexusPublishing {
@@ -119,5 +120,11 @@ subprojects {
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         compilerOptions.freeCompilerArgs.add("-Xskip-prerelease-check")
+    }
+}
+
+kover {
+    merge {
+        subprojects { true }
     }
 }
